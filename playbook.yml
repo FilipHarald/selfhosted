@@ -6,3 +6,8 @@
    - name: Print message
      ansible.builtin.debug:
        msg: Hello world
+
+- name: attempting to install docker
+  hosts: all
+  roles:
+    - geerlingguy.docker
