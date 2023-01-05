@@ -8,17 +8,28 @@
 - hosts: all
   become: yes
 
+  vars:
+    pip_install_packages:
+      - name: docker
+      - name: docker-compose
+
   roles:
       - role: system
         tags:
             - system
 
-#- name: setting up some security
-#  hosts: all
-#  roles:
-#    - geerlingguy.security
-#
-      #- name: install docker
-      #hosts: all
-      #roles:
-      #- geerlingguy.docker
+      - role: geerlingguy.security
+        tags:
+            - security
+
+      - role: geerlingguy.docker
+        tags:
+            - docker
+
+      - role: geerlingguy.pip
+        tags:
+            - pip
+
+      - role: containers
+        tags:
+          - containers

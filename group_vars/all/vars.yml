@@ -7,9 +7,12 @@
 username: filip
 ssh_public_key_path: /home/filip/.ssh/id_ed25519.pub
 
+docker_compose_dir: my-docker-dir
+
 #
 # SSH (geerlingguy.security)
 #
+ansible_ssh_port: 2849
 security_ssh_port: 2849
 
 security_sudoers_passwordless: ['{{ username }}']

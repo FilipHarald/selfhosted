@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: always
+    environment:
+      WEBSOCKET_ENABLED: "true"
+    volumes:
+      - ./vaultwarden-data:/data
+
+  caddy:
+    build:
+      context: .
+      dockerfile: caddy.Dockerfile
+    container_name: caddy
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./caddy-config:/config
+      - ./caddy-data:/data
+    environment:
+      DOMAIN: "montehar.duckdns.org"
+      EMAIL: "filip.harald@gmail.com"
+      DUCKDNS_TOKEN: "2bb08349-9476-4cd2-9e3b-e9cc06852b73"
+      LOG_FILE: "/data/access.log"

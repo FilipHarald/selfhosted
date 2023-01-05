@@ -1,4 +1,5 @@
 ---
 roles:
-    - name: geerlingguy.docker
     - name: geerlingguy.security
+    - name: geerlingguy.docker
+    - name: geerlingguy.pip
