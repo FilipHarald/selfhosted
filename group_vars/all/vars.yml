@@ -1,0 +1,18 @@
+#
+# Misc
+#
+
+hostname: '{{ inventory_hostname }}'
+
+username: filip
+
+#
+# SSH (geerlingguy.security)
+#
+security_ssh_port: 2849
+
+security_sudoers_passwordless: ['{{ username }}']
+
+security_autoupdate_reboot: true
+
+security_autoupdate_reboot_time: '23:00'
