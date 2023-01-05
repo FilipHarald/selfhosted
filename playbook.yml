@@ -1,24 +1,23 @@
 ---
-- name: ssh juggle
-  hosts: all
+- hosts: all
   gather_facts: no
 
   pre_tasks:
       - import_tasks: tasks/ssh_juggle_port.yml
 
-- name: My first play
-  hosts: all
-  tasks:
-   - name: Ping my hosts
-     ansible.builtin.ping:
-   - name: Print message
-     ansible.builtin.debug:
-       msg: Hello world
-         #- name: setting up some security
-         #hosts: all
-         #roles:
-         #- geerlingguy.security
+- hosts: all
+  become: yes
 
+  roles:
+      - role: system
+        tags:
+            - system
+
+#- name: setting up some security
+#  hosts: all
+#  roles:
+#    - geerlingguy.security
+#
       #- name: install docker
       #hosts: all
       #roles:

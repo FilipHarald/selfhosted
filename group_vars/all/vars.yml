@@ -2,9 +2,10 @@
 # Misc
 #
 
-hostname: '{{ inventory_hostname }}'
+# hostname: '{{ inventory_hostname }}'
 
 username: filip
+ssh_public_key_path: /home/filip/.ssh/id_ed25519.pub
 
 #
 # SSH (geerlingguy.security)
