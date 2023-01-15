@@ -1,1 +1,3 @@
-trying out own version of https://github.com/notthebee/infra
+# TODO
+1. backup-cron
+1. test backup?

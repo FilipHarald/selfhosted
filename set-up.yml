@@ -1,0 +1,40 @@
+---
+- hosts: localhost
+  gather_facts: false
+  vars_prompt:
+    - name: to_be_stored_server_ip
+      prompt: What is your server ip?
+      private: false
+
+    - name: to_be_vaulted_server_root_password
+      prompt: What is the root password of the server?
+      private: false
+    - name: to_be_vaulted_duckdns_email
+      prompt: What is your duckdns username (email)?
+      private: false
+    - name: to_be_vaulted_duckdns_domain_name
+      prompt: What is your duckdns domain name?
+      private: false
+    - name: to_be_vaulted_duckdns_token
+      prompt: What is your duckdns token?
+      private: false
+
+    - name: vault_password
+      prompt: password for encrypting vault-items
+      private: false
+
+  vars:
+    encrypted_server_root_password: "{{ to_be_vaulted_server_root_password | vault(vault_password, wrap_object=true) | to_yaml }}"
+    encrypted_duckdns_email: "{{ to_be_vaulted_duckdns_email | vault(vault_password, wrap_object=true) | to_yaml }}"
+    encrypted_duckdns_domain_name: "{{ to_be_vaulted_duckdns_domain_name | vault(vault_password, wrap_object=true) | to_yaml }}"
+    encrypted_duckdns_token: "{{ to_be_vaulted_duckdns_token | vault(vault_password, wrap_object=true) | to_yaml }}"
+
+  tasks:
+    - name: add server-host
+      ansible.builtin.add_host:
+        hostname: "{{ to_be_stored_server_ip }}"
+
+    - name: vault data
+      template:
+        src: ./vault_template.yml.j2
+        dest: ./group_vars/all/vault.yml
