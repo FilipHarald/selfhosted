@@ -10,7 +10,7 @@
 
 - name: copy the compose file
   template:
-    src: templates/docker-compose.yml
+    src: templates/docker-compose.yml.j2
     dest: "{{ docker_compose_dir }}/docker-compose.yml"
 
 - name: copy Caddyfile

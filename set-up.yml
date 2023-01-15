@@ -2,7 +2,7 @@
 - hosts: localhost
   gather_facts: false
   vars_prompt:
-    - name: to_be_stored_server_ip
+    - name: to_be_stored_server_address
       prompt: What is your server ip?
       private: false
 
@@ -30,11 +30,15 @@
     encrypted_duckdns_token: "{{ to_be_vaulted_duckdns_token | vault(vault_password, wrap_object=true) | to_yaml }}"
 
   tasks:
-    - name: add server-host
-      ansible.builtin.add_host:
-        hostname: "{{ to_be_stored_server_ip }}"
+    - name: add host to ssh-config
+      ansible.builtin.blockinfile:
+        path: ~/.ssh/config
+        create: true
+        block: |
+          Host my_server
+            HostName {{ to_be_stored_server_address }}
 
     - name: vault data
       template:
-        src: ./vault_template.yml.j2
+        src: ./group_vars/all/vault.yml.j2
         dest: ./group_vars/all/vault.yml

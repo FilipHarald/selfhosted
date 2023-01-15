@@ -1,4 +1,4 @@
-vault_server_root_password: !vault | {{ encrypted_server_root_password }}
-vault_duckdns_email: !vault | {{ encrypted_duckdns_email }}
-vault_duckdns_domain_name: !vault | {{ encrypted_duckdns_domain_name }}
-vault_duckdns_token: !vault | {{ encrypted_duckdns_token }}
+vault_server_root_password: {{ encrypted_server_root_password }}
+vault_duckdns_email: {{ encrypted_duckdns_email }}
+vault_duckdns_domain_name: {{ encrypted_duckdns_domain_name }}
+vault_duckdns_token: {{ encrypted_duckdns_token }}
