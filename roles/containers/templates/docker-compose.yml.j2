@@ -9,6 +9,7 @@ services:
       WEBSOCKET_ENABLED: "true"
     volumes:
       - ./vaultwarden-data:/data
+    restart: unless-stopped
 
   caddy:
     build:
@@ -28,3 +29,17 @@ services:
       EMAIL: "{{ vault_duckdns_email }}"
       DUCKDNS_TOKEN: "{{ vault_duckdns_token }}"
       LOG_FILE: "/data/access.log"
+    restart: unless-stopped
+
+  syncthing:
+    image: syncthing/syncthing
+    container_name: syncthing
+    hostname: "{{ username }}-selfhosted"
+    volumes:
+      - ./syncthing:/var/syncthing
+    ports:
+      - 8384:8384 # Web UI
+      - 22000:22000/tcp # TCP file transfers
+      - 22000:22000/udp # QUIC file transfers
+      - 21027:21027/udp # Receive local discovery broadcasts
+    restart: unless-stopped
