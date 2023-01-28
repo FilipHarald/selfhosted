@@ -3,4 +3,8 @@
       <user>{{ vault_syncthing_username }}</user>
       <password>{{ vault_syncthing_password | string | password_hash('bcrypt') }}</password>
     </gui>
+    <options>
+      <urAccepted>3</urAccepted>
+      <urSeen>3</urSeen>
+    </options>
 </configuration>

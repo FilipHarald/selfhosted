@@ -1,5 +1,4 @@
 # TODO
-syncthing
 ssh-key
 hostname
 bash as shell

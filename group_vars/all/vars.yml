@@ -28,7 +28,7 @@ caddy_name: caddy
 vaultwarden_name: vaultwarden
 syncthing_name: syncthing
 
-docker_compose_dir: selfhosted-files
+docker_compose_dir: selfhosted
 caddy_dir: "{{ docker_compose_dir}}/{{caddy_name}}"
 caddy_config_dir: "{{ docker_compose_dir}}/{{caddy_name}}/config"
 caddy_data_dir: "{{ docker_compose_dir}}/{{caddy_name}}/data"
@@ -36,3 +36,5 @@ vaultwarden_dir: "{{ docker_compose_dir}}/{{vaultwarden_name}}"
 vaultwarden_data_dir: "{{ docker_compose_dir}}/{{vaultwarden_name}}/data"
 syncthing_dir: "{{ docker_compose_dir}}/{{syncthing_name}}"
 syncthing_config_dir: "{{ docker_compose_dir}}/{{syncthing_name}}/config"
+
+syncthing_vaultwarden_volume_name: volumed-vaultwarden-data

@@ -33,7 +33,8 @@ services:
     hostname: "{{ username }}-selfhosted"
     restart: unless-stopped
     volumes:
-      - ./{{ syncthing_name }}:/var/syncthing # TODO: add vaultwarden
+      - ./{{ syncthing_name }}/config:/var/syncthing/config
+      - ./{{ vaultwarden_name }}/data:/var/syncthing/{{syncthing_vaultwarden_volume_name }}
     ports:
       - 8384:8384 # Web UI
       - 22000:22000/tcp # TCP file transfers

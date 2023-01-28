@@ -30,6 +30,7 @@
     src: "files/{{ syncthing_name }}/config.xml.j2"
     dest: "{{ syncthing_config_dir }}/config.xml"
     force: no
+  register: syncthing_template_result
 
 - name: copy the compose file
   template:
@@ -39,3 +40,23 @@
 - name: docker compose up
   community.docker.docker_compose:
     project_src: "{{ docker_compose_dir }}"
+
+- name: register syncthing container variable
+  community.docker.docker_container_info:
+    name: "{{ syncthing_name }}"
+  register: syncthing_container
+  when: syncthing_template_result.changed is true
+
+- name: wait for syncthing to set-up
+  ansible.builtin.wait_for:
+    timeout: 10 # TODO: something better than timeout
+  when: syncthing_template_result.changed is true
+
+- name: create syncthing directory for vaultwarden-data
+  community.docker.docker_container_exec:
+    container: "{{ syncthing_name }}"
+    argv:
+      - /bin/sh
+      - "-c"
+      - "syncthing cli --home /var/syncthing/config config folders add --id selfhosted-vaultwarden --label vaultwarden --path ~/{{syncthing_vaultwarden_volume_name }} --type sendonly"
+  when: syncthing_template_result.changed is true
