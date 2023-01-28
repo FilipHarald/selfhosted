@@ -9,6 +9,7 @@
     - name: to_be_vaulted_server_root_password
       prompt: What is the root password of the server?
       private: false
+
     - name: to_be_vaulted_duckdns_email
       prompt: What is your duckdns username (email)?
       private: false
@@ -19,8 +20,15 @@
       prompt: What is your duckdns token?
       private: false
 
+    - name: to_be_vaulted_syncthing_username
+      prompt: Type desired username for Syncthing-GUI
+      private: false
+    - name: to_be_vaulted_syncthing_password
+      prompt: Type desired password for Syncthing-GUI
+      private: false
+
     - name: vault_password
-      prompt: password for encrypting vault-items
+      prompt: Type password for encrypting vault-items
       private: false
 
   vars:
@@ -28,6 +36,10 @@
     encrypted_duckdns_email: "{{ to_be_vaulted_duckdns_email | vault(vault_password, wrap_object=true) | to_yaml }}"
     encrypted_duckdns_domain_name: "{{ to_be_vaulted_duckdns_domain_name | vault(vault_password, wrap_object=true) | to_yaml }}"
     encrypted_duckdns_token: "{{ to_be_vaulted_duckdns_token | vault(vault_password, wrap_object=true) | to_yaml }}"
+    encrypted_syncthing_username: "{{ to_be_vaulted_syncthing_username | vault(vault_password, wrap_object=true) | to_yaml }}"
+    encrypted_syncthing_password: "{{ to_be_vaulted_syncthing_password | vault(vault_password, wrap_object=true) | to_yaml }}"
+    pip_install_packages:
+      - name: passlib
 
   tasks:
     - name: add host to ssh-config
@@ -42,3 +54,8 @@
       template:
         src: ./group_vars/all/vault.yml.j2
         dest: ./group_vars/all/vault.yml
+
+  roles:
+    - role: geerlingguy.pip
+      tags:
+          - pip

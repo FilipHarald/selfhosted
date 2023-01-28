@@ -4,10 +4,9 @@
 
 # hostname: '{{ inventory_hostname }}'
 
-username: filip
+username: filip # TODO
 ssh_public_key_path: /home/filip/.ssh/id_ed25519.pub
 
-docker_compose_dir: my-docker-dir
 
 #
 # SSH (geerlingguy.security)
@@ -20,3 +19,20 @@ security_sudoers_passwordless: ['{{ username }}']
 security_autoupdate_reboot: true
 
 security_autoupdate_reboot_time: '23:00'
+
+#
+# Docker and services
+#
+
+caddy_name: caddy
+vaultwarden_name: vaultwarden
+syncthing_name: syncthing
+
+docker_compose_dir: selfhosted-files
+caddy_dir: "{{ docker_compose_dir}}/{{caddy_name}}"
+caddy_config_dir: "{{ docker_compose_dir}}/{{caddy_name}}/config"
+caddy_data_dir: "{{ docker_compose_dir}}/{{caddy_name}}/data"
+vaultwarden_dir: "{{ docker_compose_dir}}/{{vaultwarden_name}}"
+vaultwarden_data_dir: "{{ docker_compose_dir}}/{{vaultwarden_name}}/data"
+syncthing_dir: "{{ docker_compose_dir}}/{{syncthing_name}}"
+syncthing_config_dir: "{{ docker_compose_dir}}/{{syncthing_name}}/config"

@@ -3,43 +3,39 @@ version: '3'
 services:
   vaultwarden:
     image: vaultwarden/server:latest
-    container_name: vaultwarden
-    restart: always
+    container_name: {{ vaultwarden_name }}
+    restart: unless-stopped
     environment:
       WEBSOCKET_ENABLED: "true"
     volumes:
-      - ./vaultwarden-data:/data
-    restart: unless-stopped
+      - ./{{ vaultwarden_name }}/data:/data
 
   caddy:
-    build:
-      context: .
-      dockerfile: caddy.Dockerfile
-    container_name: caddy
-    restart: always
+    build: ./{{ caddy_name }}
+    container_name: {{ caddy_name }}
+    restart: unless-stopped
     ports:
       - 80:80
       - 443:443
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - ./caddy-config:/config
-      - ./caddy-data:/data
+      - ./{{ caddy_name }}/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./{{ caddy_name }}/config:/config
+      - ./{{ caddy_name }}/data:/data
     environment:
       DOMAIN: "{{ vault_duckdns_domain_name }}"
       EMAIL: "{{ vault_duckdns_email }}"
       DUCKDNS_TOKEN: "{{ vault_duckdns_token }}"
       LOG_FILE: "/data/access.log"
-    restart: unless-stopped
 
   syncthing:
     image: syncthing/syncthing
     container_name: syncthing
     hostname: "{{ username }}-selfhosted"
+    restart: unless-stopped
     volumes:
-      - ./syncthing:/var/syncthing
+      - ./{{ syncthing_name }}:/var/syncthing # TODO: add vaultwarden
     ports:
       - 8384:8384 # Web UI
       - 22000:22000/tcp # TCP file transfers
       - 22000:22000/udp # QUIC file transfers
       - 21027:21027/udp # Receive local discovery broadcasts
-    restart: unless-stopped

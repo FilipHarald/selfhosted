@@ -7,22 +7,35 @@
     state: directory
   loop:
     - "{{ docker_compose_dir }}"
-
-- name: copy the compose file
-  template:
-    src: templates/docker-compose.yml.j2
-    dest: "{{ docker_compose_dir }}/docker-compose.yml"
+    - "{{ caddy_dir }}"
+    - "{{ caddy_config_dir }}"
+    - "{{ caddy_data_dir }}"
+    - "{{ vaultwarden_dir }}"
+    - "{{ vaultwarden_data_dir }}"
+    - "{{ syncthing_dir }}"
+    - "{{ syncthing_config_dir }}"
 
 - name: copy Caddyfile
   copy:
-    src: templates/Caddyfile # change away from templates
-    dest: "{{ docker_compose_dir }}/Caddyfile"
+    src: "files/{{ caddy_name }}/Caddyfile"
+    dest: "{{ caddy_dir }}/Caddyfile"
 
 - name: copy caddy.Dockerfile
   copy:
-    src: templates/caddy.Dockerfile # change away from templates
-    dest: "{{ docker_compose_dir }}/caddy.Dockerfile"
+    src: "files/{{ caddy_name }}/Dockerfile"
+    dest: "{{ caddy_dir }}/Dockerfile"
 
-- name: Docker-compose up
+- name: copy the syncthing GUI config
+  template:
+    src: "files/{{ syncthing_name }}/config.xml.j2"
+    dest: "{{ syncthing_config_dir }}/config.xml"
+    force: no
+
+- name: copy the compose file
+  template:
+    src: files/docker-compose.yml.j2
+    dest: "{{ docker_compose_dir }}/docker-compose.yml"
+
+- name: docker compose up
   community.docker.docker_compose:
     project_src: "{{ docker_compose_dir }}"

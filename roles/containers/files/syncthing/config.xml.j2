@@ -1,0 +1,6 @@
+<configuration version="37">
+    <gui enabled="true" tls="true" debugging="false">
+      <user>{{ vault_syncthing_username }}</user>
+      <password>{{ vault_syncthing_password | string | password_hash('bcrypt') }}</password>
+    </gui>
+</configuration>

@@ -1,3 +1,8 @@
 # TODO
-1. backup-cron
-1. test backup?
+syncthing
+ssh-key
+hostname
+bash as shell
+seperate main and set-up
+
+future: set-up syncthing on localhost as well?
