@@ -18,13 +18,11 @@
   encode gzip
 
   handle_path /vaultwarden/* {
-    uri strip_prefix /vaultwarden
     reverse_proxy /notifications/hub vaultwarden:3012
     reverse_proxy vaultwarden:80
   }
 
   handle_path /syncthing/* {
-    uri strip_prefix /syncthing
     reverse_proxy syncthing:8384 {
       header_up Host {upstream_hostport}
       header_up X-Forwarded-Host {host}
