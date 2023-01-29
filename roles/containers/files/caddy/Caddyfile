@@ -25,7 +25,6 @@
   handle_path /syncthing/* {
     reverse_proxy syncthing:8384 {
       header_up Host {upstream_hostport}
-      header_up X-Forwarded-Host {host}
     }
   }
 }
