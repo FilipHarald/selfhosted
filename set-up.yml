@@ -53,7 +53,7 @@
         path: ~/.ssh/config
         create: true
         block: |
-          Host my_server
+          Host my_selfhosted_server
             HostName {{ to_be_stored_server_address }}
             Port {{ security_ssh_port }}
 
