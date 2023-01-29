@@ -17,9 +17,17 @@
   # if you encounter issues.
   encode gzip
 
-  # Notifications redirected to the WebSocket server
-  reverse_proxy /notifications/hub vaultwarden:3012
+  handle_path /vaultwarden/* {
+    uri strip_prefix /vaultwarden
+    reverse_proxy /notifications/hub vaultwarden:3012
+    reverse_proxy vaultwarden:80
+  }
 
-  # Proxy everything else to Rocket
-  reverse_proxy vaultwarden:80
+  handle_path /syncthing/* {
+    uri strip_prefix /syncthing
+    reverse_proxy syncthing:8384 {
+      header_up Host {upstream_hostport}
+      header_up X-Forwarded-Host {host}
+    }
+  }
 }

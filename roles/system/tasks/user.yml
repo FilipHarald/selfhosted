@@ -48,8 +48,8 @@
 - name: Suppress login messages
   file:
     name: /home/{{ username }}/.hushlogin
-    mode: 0644
-    state: touch
+    mode: 0755
+    state: file
     owner: "{{ username }}"
     group: "{{ username }}"
     modification_time: preserve

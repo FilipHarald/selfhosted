@@ -1,1 +1,1 @@
-ansible-playbook main.yml --ask-vault-pass
+ansible-playbook main.yml --ask-vault-pass --diff

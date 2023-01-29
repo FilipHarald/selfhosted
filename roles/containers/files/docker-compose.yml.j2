@@ -35,8 +35,8 @@ services:
     volumes:
       - ./{{ syncthing_name }}/config:/var/syncthing/config
       - ./{{ vaultwarden_name }}/data:/var/syncthing/{{syncthing_vaultwarden_volume_name }}
+    expose:
+      - 8384
     ports:
-      - 8384:8384 # Web UI
       - 22000:22000/tcp # TCP file transfers
       - 22000:22000/udp # QUIC file transfers
-      - 21027:21027/udp # Receive local discovery broadcasts
