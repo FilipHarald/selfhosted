@@ -1,5 +1,5 @@
 ---
-- name: SSH Port Juggle | Try connecting via SSH
+- name: SSH Port Juggle | Try connecting
   wait_for_connection:
     timeout: 5
   ignore_errors: true
@@ -11,7 +11,7 @@
   when:
     - _ssh_port_result is failed
 
-- name: SSH Port Juggle | Try connecting again
+- name: SSH Port Juggle | Try connecting - default port
   wait_for_connection:
     timeout: 5
   ignore_errors: true
@@ -19,7 +19,7 @@
   when:
     - _ssh_port_result is failed
 
-- name: SSH Port Juggle | Try root
+- name: SSH Port Juggle | Set the root credentials
   set_fact:
     ansible_ssh_port: "22"
     ansible_ssh_user: "root"
@@ -28,7 +28,7 @@
     - _ssh_port_result is failed
     - _ssh_port_default_result is failed
 
-- name: Try root
+- name: SSH Port Juggle | Try connecting - root
   wait_for_connection:
     timeout: 5
   ignore_errors: true

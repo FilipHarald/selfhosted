@@ -5,6 +5,12 @@
     - name: to_be_stored_server_address
       prompt: What is your server ip?
       private: false
+    - name: to_be_stored_ssh_public_key_path
+      prompt: Where is your public ssh-key located?
+      private: false
+    - name: to_be_stored_server_user
+      prompt: What username would you like to have on the server?
+      private: false
 
     - name: to_be_vaulted_server_root_password
       prompt: What is the root password of the server?
@@ -49,6 +55,7 @@
         block: |
           Host my_server
             HostName {{ to_be_stored_server_address }}
+            Port {{ security_ssh_port }}
 
     - name: vault data
       template:
