@@ -23,7 +23,7 @@
   set_fact:
     ansible_ssh_port: "22"
     ansible_ssh_user: "root"
-    ansible_ssh_password: "{{ vault_root_password }}"
+    ansible_ssh_password: "{{ vault_server_root_password }}"
   when:
     - _ssh_port_result is failed
     - _ssh_port_default_result is failed

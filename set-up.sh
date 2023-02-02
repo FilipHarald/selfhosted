@@ -1,3 +1,3 @@
-sudo apt install ansible
+sudo apt install ansible sshpass
 ansible-galaxy install -r requirements.yml
 ansible-playbook set-up.yml
