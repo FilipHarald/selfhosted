@@ -49,7 +49,7 @@
   file:
     name: /home/{{ username }}/.hushlogin
     mode: 0755
-    state: file
+    state: touch
     owner: "{{ username }}"
     group: "{{ username }}"
     modification_time: preserve
