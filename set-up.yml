@@ -54,7 +54,7 @@
         create: true
         block: |
           Host my_selfhosted_server
-            User {{ username }}
+            User {{ to_be_stored_server_user }}
             HostName {{ to_be_stored_server_address }}
             Port {{ security_ssh_port }}
 
