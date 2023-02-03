@@ -24,7 +24,7 @@ flowchart LR
     1. with IP-address (public or local)
     1. with at least 1GB of RAM
 1. a duckdns-account
-    1. with the preferred URL registered to the servers-IPa
+    1. with the preferred URL registered to the servers-IP
 1. a local machine that can run ansible
 
 ### running
