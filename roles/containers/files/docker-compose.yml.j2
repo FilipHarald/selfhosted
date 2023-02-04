@@ -11,7 +11,7 @@ services:
       - ./{{ vaultwarden_name }}/data:/data
 
   caddy:
-    build: ./{{ caddy_name }}
+    build: ./{{ caddy_name }} # TODO: building this on the host requires 1GB of RAM, perhaps we can build locally?
     container_name: {{ caddy_name }}
     restart: unless-stopped
     ports:
