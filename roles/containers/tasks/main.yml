@@ -20,11 +20,6 @@
     src: "files/{{ caddy_name }}/Caddyfile"
     dest: "{{ caddy_dir }}/Caddyfile"
 
-- name: copy caddy.Dockerfile
-  copy:
-    src: "files/{{ caddy_name }}/Dockerfile"
-    dest: "{{ caddy_dir }}/Dockerfile"
-
 - name: copy the syncthing GUI config
   template:
     src: "files/{{ syncthing_name }}/config.xml.j2"

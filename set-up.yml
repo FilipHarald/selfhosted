@@ -16,14 +16,11 @@
       prompt: What is the root password of the server?
       private: false
 
-    - name: to_be_vaulted_duckdns_email
-      prompt: What is your duckdns username (email)?
+    - name: to_be_vaulted_domain_email
+      prompt: What is your email?
       private: false
-    - name: to_be_vaulted_duckdns_domain_name
-      prompt: What is your duckdns domain name?
-      private: false
-    - name: to_be_vaulted_duckdns_token
-      prompt: What is your duckdns token?
+    - name: to_be_vaulted_domain_name
+      prompt: What is your domain name?
       private: false
 
     - name: to_be_vaulted_syncthing_username
@@ -39,9 +36,8 @@
 
   vars:
     encrypted_server_root_password: "{{ to_be_vaulted_server_root_password | vault(vault_password, wrap_object=true) | to_yaml }}"
-    encrypted_duckdns_email: "{{ to_be_vaulted_duckdns_email | vault(vault_password, wrap_object=true) | to_yaml }}"
-    encrypted_duckdns_domain_name: "{{ to_be_vaulted_duckdns_domain_name | vault(vault_password, wrap_object=true) | to_yaml }}"
-    encrypted_duckdns_token: "{{ to_be_vaulted_duckdns_token | vault(vault_password, wrap_object=true) | to_yaml }}"
+    encrypted_domain_email: "{{ to_be_vaulted_domain_email | vault(vault_password, wrap_object=true) | to_yaml }}"
+    encrypted_domain_name: "{{ to_be_vaulted_domain_name | vault(vault_password, wrap_object=true) | to_yaml }}"
     encrypted_syncthing_username: "{{ to_be_vaulted_syncthing_username | vault(vault_password, wrap_object=true) | to_yaml }}"
     encrypted_syncthing_password: "{{ to_be_vaulted_syncthing_password | vault(vault_password, wrap_object=true) | to_yaml }}"
     pip_install_packages:

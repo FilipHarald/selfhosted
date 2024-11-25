@@ -1,6 +1,6 @@
 # Selfhosted
 
-[Ansible playbooks](https://docs.ansible.com/ansible/latest/index.html) for setting up [Vaultwarden](https://github.com/dani-garcia/vaultwarden) password manager on a fresh server. Adding - [basic](https://github.com/geerlingguy/ansible-role-security#ansible-role-security-basics) - security and using [Duck DNS](https://www.duckdns.org/about.jsp) subdomain.
+[Ansible playbooks](https://docs.ansible.com/ansible/latest/index.html) for setting up [Vaultwarden](https://github.com/dani-garcia/vaultwarden) password manager on a fresh server. Adding - [basic](https://github.com/geerlingguy/ansible-role-security#ansible-role-security-basics) - security.
 
 ## Tools & Architecure
 
@@ -29,15 +29,15 @@ flowchart LR
 ### Requirements
 1. a server where you want the system to be hosted with...
     1. root-access
-    1. IP-address (public or local)
+    1. IP-address
     1. at least 1GB of RAM
-1. a duckdns-account with a registred domain name to the server
+1. a registered domain pointing to the server
 1. a local machine that can run ansible
 
 ### Running
 You need to run two scripts in order to set-up the server...
 1. `./set-up.sh` - to set-up the local machine and vault the secrets.
-1. `./run.sh` - to set-up the server, it will take about 20 mins.
+1. `./run.sh` - to set-up the server.
 <details>
   <summary>You can also run...</summary>
 
@@ -46,7 +46,7 @@ You need to run two scripts in order to set-up the server...
 </details>
 
 ### Setting up Syncthing
-Go to syncthing on https://YOURSUBDOMAIN.duckdns.org/syncthing/ and start syncing your folder. Perhaps with another friend who also has this set-up?
+Go to syncthing on https://YOURDOMAIN/syncthing/ and start syncing your folder. Perhaps with another friend who also has this set-up?
 
 ### Start using Vaultwarden
-You are now all done! Go to https://YOURSUBDOMAIN.duckdns.org/vaultwarden/ and start adding passwords. Or get started with some [Bitwarden-clients](https://bitwarden.com/download/) and connect them to your Vaultwarden.
+You are now all done! Go to https://YOURDOMAIN/vaultwarden/ and start adding passwords. Or get started with some [Bitwarden-clients](https://bitwarden.com/download/) and connect them to your Vaultwarden.

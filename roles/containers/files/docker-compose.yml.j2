@@ -11,7 +11,7 @@ services:
       - ./{{ vaultwarden_name }}/data:/data
 
   caddy:
-    build: ./{{ caddy_name }} # TODO: building this on the host requires 1GB of RAM, perhaps we can build locally?
+    image: caddy:latest
     container_name: {{ caddy_name }}
     restart: unless-stopped
     ports:
@@ -22,9 +22,8 @@ services:
       - ./{{ caddy_name }}/config:/config
       - ./{{ caddy_name }}/data:/data
     environment:
-      DOMAIN: "{{ vault_duckdns_domain_name }}"
-      EMAIL: "{{ vault_duckdns_email }}"
-      DUCKDNS_TOKEN: "{{ vault_duckdns_token }}"
+      DOMAIN: "{{ vault_domain_name }}"
+      EMAIL: "{{ vault_domain_email }}"
       LOG_FILE: "/data/access.log"
 
   syncthing:
