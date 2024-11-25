@@ -1,6 +1,6 @@
 ---
 - hosts: localhost
-  gather_facts: false
+  gather_facts: true
   vars_prompt:
     - name: to_be_stored_server_address
       prompt: What is your server ip?
