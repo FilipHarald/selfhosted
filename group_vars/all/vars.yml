@@ -2,7 +2,7 @@
 # SSH (geerlingguy.security)
 #
 security_ssh_port: 2849
-security_sudoers_passwordless: ["{{ username }}"]
+security_sudoers_passwordless: ['{{ username }}']
 security_autoupdate_reboot: true
 security_autoupdate_reboot_time: "23:00"
 
@@ -13,7 +13,7 @@ caddy_name: caddy
 vaultwarden_name: vaultwarden
 syncthing_name: syncthing
 
-docker_compose_dir: selfhosted
+docker_compose_dir: docker_volumes
 
 caddy_dir: "{{ docker_compose_dir}}/{{caddy_name}}"
 caddy_config_dir: "{{ docker_compose_dir}}/{{caddy_name}}/config"

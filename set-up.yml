@@ -60,6 +60,10 @@
         dest: ./group_vars/all/vault.yml
 
   roles:
+    - role: pip-workaround
+      tags:
+          - pip
+
     - role: geerlingguy.pip
       tags:
           - pip

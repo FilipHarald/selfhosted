@@ -26,6 +26,10 @@
         tags:
             - docker
 
+      - role: pip-workaround
+        tags:
+            - pip
+
       - role: geerlingguy.pip
         tags:
             - pip
